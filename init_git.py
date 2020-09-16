@@ -3,7 +3,7 @@
 import os
 import shutil
 
-def import_drivers_from_autolab_core(path_to_drivers,path_to_new_git):
+def import_drivers_from_autolab_git(path_to_drivers,path_to_new_git):
     
     ''' Function made for initial commit of autolab drivers into autolab-driver git. Remove all drivers in the target path_to_new_git directory then copy drivers from path_to_drivers directory with appropriate structure '''
     
