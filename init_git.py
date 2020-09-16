@@ -42,9 +42,9 @@ def import_drivers_from_autolab_git(path_to_drivers,path_to_new_git):
             config = configparser.ConfigParser()
             config.add_section('release_notes')
             config['release_notes']['version'] = '1.0.0'
-            config['release_notes']['date']    = date.today().strftime("%d-%b-%Y")
+            config['release_notes']['date']    = date.today().strftime("%d/%m/%Y")
             config['release_notes']['notes']   = "First push from autolab's previous version"
             
-            path_release_notes = os.path.join(new_sub_driver_dir,'release_notes')
+            path_release_notes = os.path.join(new_sub_driver_dir,'release_notes.ini')
             with open(path_release_notes, 'w') as configfile:    # save
                 config.write(configfile)
