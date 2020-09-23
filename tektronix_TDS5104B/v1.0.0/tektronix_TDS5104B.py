@@ -14,6 +14,8 @@ from numpy import frombuffer,int8,ndarray
 class Driver():
     
     def __init__(self,nb_channels=4):
+        
+        self.modules = []
               
         self.nb_channels = int(nb_channels)
         
@@ -25,7 +27,7 @@ class Driver():
         
         for i in range(1,self.nb_channels+1):
             setattr(self,f'channel{i}',Channel(self,i))
-        
+            self.modules.append(f'channel{i}')
     
     ### User utilities
     def get_data_channels(self,channels=[]):
