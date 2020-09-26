@@ -31,8 +31,8 @@ def import_drivers_from_autolab_git(path_to_drivers,path_to_new_git):
         if driver_dir in list_dir_without_versioning:
             new_sub_driver_dir = new_driver_dir
         else:
-            os.mkdir(new_driver_dir)  # create dir only if v1.0.0 has to be created
-            new_sub_driver_dir = os.path.join(new_driver_dir,'v1.0.0')
+            os.mkdir(new_driver_dir)  # create dir only if 1.0.0 has to be created
+            new_sub_driver_dir = os.path.join(new_driver_dir,'1.0.0')
         
         # Copy driver directory to git
         shutil.copytree(driver_path_to_copy,new_sub_driver_dir)
