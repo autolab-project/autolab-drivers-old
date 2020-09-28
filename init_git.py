@@ -48,3 +48,13 @@ def import_drivers_from_autolab_git(path_to_drivers,path_to_new_git):
             path_release_notes = os.path.join(new_sub_driver_dir,'release_notes.ini')
             with open(path_release_notes, 'w') as configfile:    # save
                 config.write(configfile)
+
+def convert_version_folder_name(path_to_folder,target_name='1.0.0'):
+    assert 'autolab-drivers' in path_to_folder, f"Check you input paths. Provided was: {path_to_new_git}"
+    
+    for folder_name in [name for name in os.listdir(path_to_folder) if os.path.isdir(name)]:
+        inner_path = os.path.join(path_to_folder,folder_name)
+        if 'v1.0.0' in os.listdir(inner_path):
+            os.rename(os.path.join(folder_name,'v1.0.0'),os.path.join(folder_name,target_name))
+            
+    
