@@ -4,7 +4,7 @@
 
 
 """
-import visa
+import pyvisa as visa
 import os
 import time
 import numpy

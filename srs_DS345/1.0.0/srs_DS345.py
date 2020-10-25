@@ -37,7 +37,7 @@ class Driver():
 ############################## Connections classes ##############################
 class Driver_VISA(Driver):
     def __init__(self, address='GPIB0::19::INSTR',**kwargs):
-        import visa
+        import pyvisa as visa
         
         rm = visa.ResourceManager()
         self.inst = rm.get_instrument(address)

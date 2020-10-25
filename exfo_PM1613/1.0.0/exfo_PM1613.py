@@ -83,7 +83,7 @@ class Driver():
 ############################## Connections classes ##############################
 class Driver_VISA(Driver):
     def __init__(self, address='GPIB0::2::INSTR',**kwargs):
-        import visa
+        import pyvisa as visa
         
         self.TIMEOUT = 10000 #ms
         

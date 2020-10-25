@@ -192,7 +192,7 @@ class Shutter :
 ############################## Connections classes ##############################
 class Driver_VISA(Driver):
     def __init__(self, address='ASRL::2::INSTR', **kwargs):
-        import visa 
+        import pyvisa as visa 
         
         self.BAUDRATE = 115200 
 

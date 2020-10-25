@@ -5,7 +5,6 @@
 
 """
 import pvcam_Manis
-#import visa
 import os
 
 ADDRESS = 'ASRL6::INSTR'     # to implement with the x axis and modify accordingly....
