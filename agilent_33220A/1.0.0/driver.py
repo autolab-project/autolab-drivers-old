@@ -8,6 +8,9 @@ Supported instruments (identified):
 
 from numpy import zeros,ones,linspace
 
+help=\
+f"""
+"""
 
 class Driver():
     

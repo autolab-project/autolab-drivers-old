@@ -8,7 +8,9 @@ Supported instruments (identified):
 
 import numpy as np
         
-    
+help=\
+f"""
+"""
 
 class Driver():
     

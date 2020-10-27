@@ -5,7 +5,11 @@
 Supported instruments (identified):
 - 
 """    
-    
+
+help=\
+f"""
+"""
+
 class Driver():
 
     slot_config = '<MODULE_NAME>'

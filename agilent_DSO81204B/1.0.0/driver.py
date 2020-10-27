@@ -9,6 +9,17 @@ Supported instruments (identified):
 import os
 from numpy import frombuffer,int8,ndarray
 
+help=\
+f"""
+----------------  Extra infos:  ----------------
+    - Datas are obtained in a binary format: int8 
+    - Header is composed as follow:
+    <format>, <type>, <points>, <count> , <X increment>, <X origin>, < X reference>, <Y increment>, <Y origin>, <Y reference>, <coupling>, <X display range>, <X display origin>, <Y display range>, <Y display origin>, <date>,
+    <time>, <frame model #>, <acquisition mode>, <completion>, <X units>, <Y units>, <max bandwidth limit>, <min bandwidth limit>    
+    - To retrieve datas (in "Units")
+    Y-axis Units = data value * Yincrement + Yorigin (analog channels) 
+    X-axis Units = data index * Xincrement + Xorigin
+"""
 
 class Driver():
     

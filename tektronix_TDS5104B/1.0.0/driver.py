@@ -10,12 +10,13 @@ import os
 import time
 from numpy import frombuffer,int8,ndarray
 
-help = f"""
+help=\
+f"""
 
 ----------------  Extra infos:  ----------------
     Datas are recorded in int8 format
     
-    Headers contains:
+    Headers contain:
     :WFMOUTPRE:BYT_NR 2;BIT_NR 16;ENCDG ASCII;BN_FMT RI;BYT_OR
     MSB;WFID 'Ch1, DC coupling, 100.0mV/div, 4.000us/div, 10000
     points, Sample mode';NR_PT 10000;PT_FMT Y;XUNIT 's';XINCR
@@ -24,8 +25,7 @@ help = f"""
     
     To retrieve real value:
     value_in_units = ((curve_in_dl - YOFf_in_dl) * YMUlt) + YZEro_in_units
-
-    """
+"""
     
 class Driver():
     
