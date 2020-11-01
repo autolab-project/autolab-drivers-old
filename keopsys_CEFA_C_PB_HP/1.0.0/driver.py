@@ -6,8 +6,9 @@ Supported instruments (identified):
 - Keopsys CEFA-C-PB-HP
 """
 
-
-
+help=\
+f"""
+"""
 
 class Driver() :
     

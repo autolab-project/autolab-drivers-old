@@ -6,7 +6,9 @@ Supported instruments (identified):
 - Newport smc100
 """
 
-
+help=\
+f"""
+"""
 
 class Driver():
 

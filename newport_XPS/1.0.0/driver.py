@@ -8,6 +8,9 @@ Supported instruments (identified):
 
 from XPS import XPS
 
+help=\
+f"""
+"""
 
 class Driver():
 

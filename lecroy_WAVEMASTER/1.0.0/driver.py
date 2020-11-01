@@ -13,6 +13,14 @@ import time
 from numpy import int8,int16,frombuffer
 import numpy as np
 
+help=\
+f"""
+----------------  Extra infos:  ----------------
+    - Datas are obtained in a binary format: 
+    int8 (encoding BYTE) or int16 (encoding WORD)
+    - To retrieve datas (in "VERTUNIT"), see corresponding log file:
+    DATA(VERTUNIT) = DATA(ACQUIRED) * VERTICAL_GAIN - VERTICAL_OFFSET
+"""
 
 class Driver():
     

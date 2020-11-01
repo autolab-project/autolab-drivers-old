@@ -9,6 +9,10 @@ Supported instruments (identified):
 import time
 import numpy as np
 
+help=\
+f"""
+"""
+
 class Driver():
     
     def __init__(self):

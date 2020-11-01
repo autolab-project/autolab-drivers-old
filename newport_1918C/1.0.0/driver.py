@@ -7,6 +7,10 @@ Supported instruments (identified): newport_1918c
 import time
 import ctypes as ct
 
+help=\
+f"""
+"""
+
 class Driver():
     
     def __init__(self):

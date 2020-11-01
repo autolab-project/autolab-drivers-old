@@ -9,6 +9,10 @@ Supported instruments (identified):
 
 import time
 
+help=\
+f"""
+"""
+
 class Driver():
 
     def __init__(self):

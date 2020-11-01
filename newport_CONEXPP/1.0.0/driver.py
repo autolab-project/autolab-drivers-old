@@ -16,6 +16,10 @@ from scipy.interpolate import interp1d
 import numpy as np
 import pandas as pd
 
+help=\
+f"""
+"""
+
 class Driver():
     
     slot_config = '<MODULE_NAME>,<CALIBRATION_PATH>'
