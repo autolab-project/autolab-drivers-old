@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
-import os
+import os,sys
 import shutil
 import configparser
 from datetime import date
 import importlib
 import inspect
 import re
+import subprocess
 
 
 def import_drivers_from_autolab_git(path_to_drivers,path_to_new_git):
@@ -69,8 +70,11 @@ def convert_getdrivermodel_to_autolabini():
     lib_path = 'driver'
     
     # Get all the class defined whitin a module but Driver_CONN
-    module = importlib.import_module(lib_path.replace('/','.'))
+    module = importlib.import_module(lib_path)
+    module = importlib.reload(module) # If has already been imported takes the local version of driver.py instead
     module_classes = [name for name, obj in inspect.getmembers(module,inspect.isclass) if obj.__module__ is lib_path.split('.')[-1] if 'Driver_' not in name]
+    
+    print(f'Classes here: {module_classes}',module)
     
     # Open module as a text file to get the get_driver_model without instanciating
     f = open(f'{lib_path}.py','r')
@@ -126,7 +130,6 @@ def convert_getdrivermodel_to_autolabini():
             if getdrivermodel_list[classe_index][1][element_index]['element'] == 'module':
                 print('ici')
                 continue
-            print(element_index)
             ## If Driver => [variable]
             if classe_name == 'Driver':
                 name = getdrivermodel_list[classe_index][1][element_index]['name']
@@ -136,25 +139,54 @@ def convert_getdrivermodel_to_autolabini():
             config.add_section(name)
             for key in getdrivermodel_list[classe_index][1][element_index].keys():
                 if key != 'name':
+                    # If 'type' is 'ndarray' modify it to array
+                    if key == 'type':
+                        if getdrivermodel_list[classe_index][1][element_index][key] == 'ndarray':
+                            getdrivermodel_list[classe_index][1][element_index][key] = 'array'
                     # remove self. at start of element if present
                     config[name][key] = re.sub('^self.','',getdrivermodel_list[classe_index][1][element_index][key]) 
-            
-                
-    with open('test.ini', 'w') as configfile:    # save
-        config.write(configfile)
     
-    return config
     
+    # Add the section for additional modules (e.g. Channel)
+    list_utilities_files = subprocess.getoutput('ls *utilities.py').splitlines()
+    assert len(list_utilities_files) == 1, f"Found {len(list_utilities_files)} utilities file"
+    lib_utilities_path = list_utilities_files[0]
+    
+    ff = open(lib_utilities_path,'r')
+    module_utilities_text = ff.read()
+    ff.close()
+    
+    lines_category_found = [line for line in module_utilities_text.splitlines() if 'category' in line]
+    assert len(lines_category_found) == 1, f"Found {len(lines_category_found)} mention of category in the file"
+    print(lines_category_found[0])
+    category_name = lines_category_found[0].split('=')[1].replace("'","").strip(' ')
+    
+    print(module_classes)
+    for module_classe in module_classes:
+        if module_classe != 'Driver':
+            print(module_classe)
+            config.add_section(module_classe)
+            config[module_classe]['element'] = 'module'
+            config[module_classe]['category'] = category_name
     
     # Write to autolab.ini file
+    with open('autolab.ini', 'w') as configfile:    # save
+        config.write(configfile)
     
-    
-    
-    
-    #return module_classes
+    # Remove the module re-import from scratch it at next occurence of this function
+    del module
+    sys.modules.pop(lib_path)
 
-
-
+def all_getdrivermodel_to_autolabini():
+    
+    list_driver_folders = [dire for dire in os.listdir() if '.' not in dire if '__'not in dire if dire!='More']
+    
+    auto_driv_root_path = os.getcwd()
+    for driver_folder in list_driver_folders:
+        os.chdir(os.path.join(driver_folder,'1.0.0'))
+        print('before:',os.getcwd())
+        convert_getdrivermodel_to_autolabini()
+        os.chdir(auto_driv_root_path)
 
 
 
