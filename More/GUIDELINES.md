@@ -22,12 +22,12 @@ my_device = Device()
 
 ### Controller
 
-First of all, we have to configure a first attribute in this class: the controller. This will be the object through which we are communicating with the device. In most cases, you will use the python package `visa` for GPIB, SERIAL, USB connections (see its documentation). You can also use the packages `telnet` or `socket` for ETHERNET communications.  
+First of all, we have to configure a first attribute in this class: the controller. This will be the object through which we are communicating with the device. In most cases, you will use the python package `pyvisa` for GPIB, SERIAL, USB connections (see its documentation). You can also use the packages `telnet` or `socket` for ETHERNET communications.  
 
-In any case, the controller needs the address of your device to establish a connection with it. With `visa`, you can get the available addresses we these three lines of codes:
+In any case, the controller needs the address of your device to establish a connection with it. With `pyvisa`, you can get the available addresses we these three lines of codes:
 
 ```python
-import visa
+import pyvisa as visa
 rm = visa.ResourceManager()
 rm.list_resources()
 ```
@@ -38,7 +38,7 @@ For ethernet connections, you should know the IP address (set it to be part of y
 This address is provided when we instantiate the device, but we store a default value in a variable `ADDRESS`.
 
 ```python
-import visa
+import pyvisa as visa
 
 ADDRESS = 'GPIB0::8::INSTR'
 
@@ -56,7 +56,7 @@ At this point, you are connected to your device as soon as you create an instanc
 We recommand to create a class function `close` to be able to close properly the connection to your device.
 
 ```python
-import visa
+import pyvisa as visa
 
 ADDRESS = 'GPIB0::8::INSTR'
 
@@ -78,10 +78,10 @@ You can know create a connection to your device, and close it properly.
 
 ### Query / Write / Read functions
 
-We now have to create interaction functions such as `write`, `query` or `read`. These functions already exists in `visa`.
+We now have to create interaction functions such as `write`, `query` or `read`. These functions already exists in `pyvisa`.
 
 ```python
-import visa
+import pyvisa as visa
 
 ADDRESS = 'GPIB0::8::INSTR'
 
@@ -112,7 +112,7 @@ We are now able to send commands and get results to our devices. Let's now defin
 The last thing to do is to create the class functions that we will need to set a parameter, to get its value, or to process an action. This depends of course of your device, have a look on your user manual to see the available commands.
 
 ```python
-import visa
+import pyvisa as visa
 
 ADDRESS = 'GPIB0::8::INSTR'
 
@@ -233,7 +233,7 @@ class ModuleB() :
 
 [ manufacturer_model.py ]
 ```python
-import visa
+import pyvisa as visa
 from moduleA import ModuleA
 from moduleB import ModuleB
 
@@ -270,7 +270,7 @@ The previous structure should be used only if the physical slot configuration is
 
 [ manufacturer_model.py ]
 ```python
-import visa
+import pyvisa as visa
 from moduleA import ModuleA
 from moduleB import ModuleB
 
