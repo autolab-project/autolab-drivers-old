@@ -97,7 +97,7 @@ class Driver_VXI11(Driver):
         self.sock.write(com)
         return self.inst.read_raw()
     def read(self):
-        self.inst.read()
+        return self.inst.read()
     def write(self,cmd):
         self.inst.write(cmd)
     def close(self):
