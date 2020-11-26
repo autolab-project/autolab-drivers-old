@@ -129,11 +129,39 @@ class Driver():
         return model
   
     
+
+
+#################################################################################
+############################## Connections classes ##############################
+class Driver_VISA(Driver):
+    def __init__(self, address='ASRL::2::INSTR', **kwargs):
+        import pyvisa as visa 
+        
+        self.BAUDRATE = 115200 
+
+        # Instantiation
+        rm = visa.ResourceManager()
+        self.inst = rm.open_resource(address)
+        self.inst.timeout = 5000 #ms
+        self.inst.baud_rate = self.BAUDRATE
+        
+        Driver.__init__(self)
+        
+        
+    def close(self):
+        try : self.inst.close()
+        except : pass
+
+    def query(self,command):
+        return self.inst.query(command).strip('\n')
     
-    
-    
-    
-    
+    def write(self,command):
+        self.inst.write(command)
+
+############################## Connections classes ##############################
+#################################################################################
+        
+
 class Shutter :
     
     def __init__(self,master,num,angles):
@@ -186,39 +214,4 @@ class Shutter :
         model.append({'element':'action','name':'invert','do':self.invert,'help':'Invert the shutter state'})
         return model
         
-    
-    
 
-
-#################################################################################
-############################## Connections classes ##############################
-class Driver_VISA(Driver):
-    def __init__(self, address='ASRL::2::INSTR', **kwargs):
-        import pyvisa as visa 
-        
-        self.BAUDRATE = 115200 
-
-        # Instantiation
-        rm = visa.ResourceManager()
-        self.inst = rm.open_resource(address)
-        self.inst.timeout = 5000 #ms
-        self.inst.baud_rate = self.BAUDRATE
-        
-        Driver.__init__(self)
-        
-        
-    def close(self):
-        try : self.inst.close()
-        except : pass
-
-    def query(self,command):
-        return self.inst.query(command).strip('\n')
-    
-    def write(self,command):
-        self.inst.write(command)
-
-############################## Connections classes ##############################
-#################################################################################
-        
-
-        
