@@ -94,9 +94,9 @@ class Driver_VXI11(Driver):
         self.write(command)
         return self.read(nbytes)
     def read_raw(self):
-        self.inst.read_raw()
+        return self.inst.read_raw()
     def read(self,nbytes=100000000):
-        self.inst.read(nbytes)
+        return self.inst.read(nbytes)
     def write(self,cmd):
         self.inst.write(cmd)
     def close(self):
