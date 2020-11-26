@@ -98,7 +98,7 @@ class Driver_VXI11(Driver):
         Driver.__init__(self, **kwargs)
     
     def read_raw(self):
-        self.sock.read_raw()
+        return self.sock.read_raw()
     def write(self,string):
         "Take a sting and write it to the scope"
         self.sock.write(string)
